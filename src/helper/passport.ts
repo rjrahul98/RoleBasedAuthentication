@@ -1,9 +1,10 @@
 import { DbModel } from '../models/userSchema'
 const { Strategy, ExtractJwt } = require('passport-jwt')
+require('dotenv').config()
 
 const opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'SECRET_KEY'
+    secretOrKey: `${process.env.SECRET_KEY}`
 }
 
 

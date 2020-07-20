@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var userSchema_1 = require("../models/userSchema");
 var jwt = require('jsonwebtoken');
 var _a = require('bcrypt'), genSaltSync = _a.genSaltSync, hashSync = _a.hashSync, compareSync = _a.compareSync;
+require('dotenv').config();
 var UserService = /** @class */ (function () {
     function UserService() {
     }
@@ -91,7 +92,7 @@ var UserService = /** @class */ (function () {
                                 message: 'Unauthorized login credentials',
                                 success: false
                             })];
-                    case 3: return [4 /*yield*/, jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': role }, 'SECRET_KEY', { expiresIn: "3 days" })];
+                    case 3: return [4 /*yield*/, jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': role }, "" + process.env.SECRET_KEY, { expiresIn: "3 days" })];
                     case 4:
                         token = _a.sent();
                         return [2 /*return*/, res.status(200).json({

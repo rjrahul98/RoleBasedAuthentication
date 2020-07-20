@@ -38,9 +38,10 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var userSchema_1 = require("../models/userSchema");
 var _a = require('passport-jwt'), Strategy = _a.Strategy, ExtractJwt = _a.ExtractJwt;
+require('dotenv').config();
 var opts = {
     jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: 'SECRET_KEY'
+    secretOrKey: "" + process.env.SECRET_KEY
 };
 module.exports = function (passport) {
     passport.use(new Strategy(opts, function (payload, done) { return __awaiter(void 0, void 0, void 0, function () {

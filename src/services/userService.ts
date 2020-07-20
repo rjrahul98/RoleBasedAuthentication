@@ -1,6 +1,7 @@
 import { DbModel } from '../models/userSchema'
 const jwt = require('jsonwebtoken')
 const { genSaltSync, hashSync, compareSync } = require('bcrypt')
+require('dotenv').config()
 
 export class UserService {
     public static async registerUser(req: any, role: string, res: any) {
@@ -36,7 +37,7 @@ export class UserService {
                         });
                     }
                     else {
-                        let token = await jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': role }, 'SECRET_KEY', { expiresIn: "3 days" });
+                        let token = await jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': role }, `${process.env.SECRET_KEY}`, { expiresIn: "3 days" });
                         return res.status(200).json({
                             'token': `Bearer ${token}`,
                             'expiresIn': 72

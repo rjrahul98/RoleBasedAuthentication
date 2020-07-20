@@ -1,17 +1,18 @@
 const mongoose = require('mongoose')
+require('dotenv').config()
 
-export class Database{
-    private mongoUrl: string = "mongodb+srv://rahul:Rahul123@cluster0.pqvke.mongodb.net/RoleBasedAuth?retryWrites=true&w=majority";
+export class Database {
+    private mongoUrl: string = `${process.env.MONGO_URL}`;
 
-    public connectMongooseServer(){
-        mongoose.connect(this.mongoUrl, {useUnifiedTopology: true, useNewUrlParser: true})
-        .then(()=>{
-            console.log('mongo server connected');
-        })
-        .catch((error: any)=>{
-            console.log(error);
-            console.log('mongo server connection failed');
-        });
+    public connectMongooseServer() {
+        mongoose.connect(this.mongoUrl, { useUnifiedTopology: true, useNewUrlParser: true })
+            .then(() => {
+                console.log('mongo server connected');
+            })
+            .catch((error: any) => {
+                console.log(error);
+                console.log('mongo server connection failed');
+            });
 
     }
 }

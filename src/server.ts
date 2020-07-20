@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 import { Database } from './db'
 import { configRoutes } from './routes'
 const passport = require('passport')
+require('dotenv').config()
 
 export const app = express();
 const dbClient = new Database();
@@ -16,7 +17,7 @@ require('./helper/passport')(passport);
 
 configRoutes(app);
 
-let port = 3000;
+let port = process.env.APP_PORT;
 app.listen(port, () => {
     console.log(`server is running on port ${port}`);
 })
