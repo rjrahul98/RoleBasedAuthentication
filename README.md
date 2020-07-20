@@ -12,7 +12,8 @@ This Node.js application is written in *Typescript* so first you need to build t
 ```bash
 $ tsc
 ```
-After building the application its time to finally start the application using
+After building the application now you can start the application using
 ```bash
 $ npm start
 ```
+Application is now running on localhost:3000
