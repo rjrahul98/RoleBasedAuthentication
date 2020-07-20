@@ -1,0 +1,16 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var userController_1 = require("../controller/userController");
+var _a = require('../helper/auth'), userAuth = _a.userAuth, checkRole = _a.checkRole;
+var express_1 = require("express");
+exports.userRoutes = express_1.Router();
+var userController = new userController_1.UserController();
+exports.userRoutes.post('/register-technician', userController.registerTechnician);
+exports.userRoutes.post('/register-supervisor', userController.registerSupervisor);
+exports.userRoutes.post('/register-admin', userController.registerAdmin);
+exports.userRoutes.post('/login-technician', userController.loginTechnician);
+exports.userRoutes.post('/login-supervisor', userController.loginSupervisor);
+exports.userRoutes.post('/login-admin', userController.loginAdmin);
+exports.userRoutes.get('/profile', userAuth, userController.getProfile);
+exports.userRoutes.get('/admin-supervisor-protected', userAuth, checkRole(["admin", "supervisor"]), userController.adminAndSupervisorProtected);
+exports.userRoutes.get('/admin-Protected', userAuth, checkRole(["admin"]), userController.adminProtected);
