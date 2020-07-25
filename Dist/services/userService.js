@@ -43,7 +43,7 @@ require('dotenv').config();
 var UserService = /** @class */ (function () {
     function UserService() {
     }
-    UserService.registerUser = function (req, role, res) {
+    UserService.registerUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var user, salt, err_1;
             return __generator(this, function (_a) {
@@ -53,7 +53,6 @@ var UserService = /** @class */ (function () {
                         user = userSchema_1.DbModel.UserModel(req.body);
                         salt = genSaltSync(10);
                         user.password = hashSync(user.password, salt);
-                        user.role = role;
                         return [4 /*yield*/, user.save()];
                     case 1:
                         _a.sent();
@@ -72,77 +71,81 @@ var UserService = /** @class */ (function () {
             });
         });
     };
-    UserService.loginUser = function (req, role, res) {
+    UserService.loginUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var user, isValidUser, token, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 10, , 11]);
+                        _a.trys.push([0, 8, , 9]);
                         return [4 /*yield*/, userSchema_1.DbModel.UserModel.findOne({ 'email': req.body.email }).exec()];
                     case 1:
                         user = _a.sent();
-                        if (!user) return [3 /*break*/, 8];
+                        if (!user) return [3 /*break*/, 6];
                         return [4 /*yield*/, compareSync(req.body.password, user.password)];
                     case 2:
                         isValidUser = _a.sent();
-                        if (!isValidUser) return [3 /*break*/, 6];
-                        if (!(user.role !== role)) return [3 /*break*/, 3];
-                        return [2 /*return*/, res.status(401).json({
-                                message: 'Unauthorized login credentials',
-                                success: false
-                            })];
-                    case 3: return [4 /*yield*/, jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': role }, "" + process.env.SECRET_KEY, { expiresIn: "3 days" })];
-                    case 4:
+                        if (!isValidUser) return [3 /*break*/, 4];
+                        return [4 /*yield*/, jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': user.role }, "" + process.env.SECRET_KEY, { expiresIn: "3 days" })];
+                    case 3:
                         token = _a.sent();
                         return [2 /*return*/, res.status(200).json({
+                                'role': user.role,
                                 'token': "Bearer " + token,
                                 'expiresIn': 72
                             })];
-                    case 5: return [3 /*break*/, 7];
-                    case 6: return [2 /*return*/, res.status(403).json({
+                    case 4: return [2 /*return*/, res.status(403).json({
                             message: 'incorrect email or password',
                             success: false
                         })];
-                    case 7: return [3 /*break*/, 9];
-                    case 8: return [2 /*return*/, res.status(404).json({
+                    case 5: return [3 /*break*/, 7];
+                    case 6: return [2 /*return*/, res.status(404).json({
                             message: 'user not found',
                             success: false
                         })];
-                    case 9: return [3 /*break*/, 11];
-                    case 10:
+                    case 7: return [3 /*break*/, 9];
+                    case 8:
                         err_2 = _a.sent();
                         return [2 /*return*/, res.status(400).json({
                                 message: err_2,
                                 success: false
                             })];
-                    case 11: return [2 /*return*/];
+                    case 9: return [2 /*return*/];
                 }
             });
         });
     };
     UserService.getProfile = function (req, res) {
         try {
-            return res.json('working for all the users');
+            return res.json({
+                message: "working for all the users",
+                success: true
+            });
         }
         catch (err) {
-            return res.status(400).json(err);
+            return res.status(400).send(err);
         }
     };
     UserService.adminAndSupervisorProtected = function (req, res) {
         try {
-            return res.status(200).json('Admin and Supervisor users can Access this');
+            return res.status(200).json({
+                message: "Admin and Supervisor users can Access this",
+                success: true
+            });
         }
         catch (err) {
-            return res.status(400).json(err);
+            return res.status(400).send(err);
         }
     };
     UserService.adminProtected = function (req, res) {
         try {
-            return res.status(200).json('Only admin users can access this');
+            return res.status(200).json({
+                message: "This is admin user's profile",
+                success: true
+            });
         }
         catch (err) {
-            return res.status(400).json(err);
+            return res.status(400).send(err);
         }
     };
     return UserService;

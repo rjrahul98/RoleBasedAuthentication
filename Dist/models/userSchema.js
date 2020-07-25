@@ -22,7 +22,9 @@ var UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["technician", "supervisor", "admin"]
+        required: true,
+        enum: ["technician", "supervisor", "admin"],
+        default: "technician"
     }
 });
 var DbModel = /** @class */ (function () {

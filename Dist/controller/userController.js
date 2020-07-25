@@ -40,87 +40,40 @@ var userService_1 = require("../services/userService");
 var UserController = /** @class */ (function () {
     function UserController() {
     }
-    UserController.prototype.registerTechnician = function (req, res) {
+    UserController.prototype.registerUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var user;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.registerUser(req, 'technician', res)];
+                    case 0: return [4 /*yield*/, userService_1.UserService.registerUser(req, res)];
                     case 1:
                         user = _a.sent();
-                        return [2 /*return*/, res.json(user)];
+                        return [2 /*return*/, res.json({
+                                data: user,
+                                success: true
+                            })];
                 }
             });
         });
     };
     ;
-    UserController.prototype.registerSupervisor = function (req, res) {
+    UserController.prototype.loginUser = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user;
+            var loggedInUser;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.registerUser(req, 'supervisor', res)];
+                    case 0: return [4 /*yield*/, userService_1.UserService.loginUser(req, res)];
                     case 1:
-                        user = _a.sent();
-                        return [2 /*return*/, res.json(user)];
+                        loggedInUser = _a.sent();
+                        return [2 /*return*/, res.json({
+                                data: loggedInUser,
+                                success: true
+                            })];
                 }
             });
         });
     };
     ;
-    UserController.prototype.registerAdmin = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var user;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.registerUser(req, 'admin', res)];
-                    case 1:
-                        user = _a.sent();
-                        return [2 /*return*/, res.json(user)];
-                }
-            });
-        });
-    };
-    ;
-    UserController.prototype.loginTechnician = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var loggedInUser;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.loginUser(req, 'technician', res)];
-                    case 1:
-                        loggedInUser = _a.sent();
-                        return [2 /*return*/, res.json(loggedInUser)];
-                }
-            });
-        });
-    };
-    UserController.prototype.loginSupervisor = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var loggedInUser;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.loginUser(req, 'supervisor', res)];
-                    case 1:
-                        loggedInUser = _a.sent();
-                        return [2 /*return*/, res.json(loggedInUser)];
-                }
-            });
-        });
-    };
-    UserController.prototype.loginAdmin = function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var loggedInUser;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, userService_1.UserService.loginUser(req, 'admin', res)];
-                    case 1:
-                        loggedInUser = _a.sent();
-                        return [2 /*return*/, res.json(loggedInUser)];
-                }
-            });
-        });
-    };
     UserController.prototype.getProfile = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -129,11 +82,15 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.getProfile(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json(data)];
+                        return [2 /*return*/, res.json({
+                                msg: data,
+                                success: true
+                            })];
                 }
             });
         });
     };
+    ;
     UserController.prototype.adminAndSupervisorProtected = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -142,11 +99,15 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.adminAndSupervisorProtected(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json(data)];
+                        return [2 /*return*/, res.json({
+                                msg: data,
+                                success: true
+                            })];
                 }
             });
         });
     };
+    ;
     UserController.prototype.adminProtected = function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var data;
@@ -155,11 +116,15 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.adminProtected(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json(data)];
+                        return [2 /*return*/, res.json({
+                                msg: data,
+                                success: true
+                            })];
                 }
             });
         });
     };
+    ;
     return UserController;
 }());
 exports.UserController = UserController;
