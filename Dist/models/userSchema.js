@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var mongoose = require('mongoose');
 var UserSchema = new mongoose.Schema({
-    fullName: {
+    name: {
         type: String,
         required: true
     },
@@ -17,8 +17,7 @@ var UserSchema = new mongoose.Schema({
     },
     mobile: {
         type: Number,
-        required: true,
-        unique: [true, 'Mobile no. already registered']
+        required: true
     },
     role: {
         type: String,

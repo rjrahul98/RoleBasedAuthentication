@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema({
-    fullName: {
+    name: {
         type: String,
         required: true
     },
@@ -16,8 +16,7 @@ const UserSchema = new mongoose.Schema({
     },
     mobile: {
         type: Number,
-        required: true,
-        unique: [true, 'Mobile no. already registered']
+        required: true
     },
     role: {
         type: String,

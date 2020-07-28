@@ -48,10 +48,7 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.registerUser(req, res)];
                     case 1:
                         user = _a.sent();
-                        return [2 /*return*/, res.json({
-                                data: user,
-                                success: true
-                            })];
+                        return [2 /*return*/, res.json(user)];
                 }
             });
         });
@@ -65,10 +62,7 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.loginUser(req, res)];
                     case 1:
                         loggedInUser = _a.sent();
-                        return [2 /*return*/, res.json({
-                                data: loggedInUser,
-                                success: true
-                            })];
+                        return [2 /*return*/, res.json(loggedInUser)];
                 }
             });
         });
@@ -82,10 +76,7 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.getProfile(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json({
-                                msg: data,
-                                success: true
-                            })];
+                        return [2 /*return*/, res.json(data)];
                 }
             });
         });
@@ -99,10 +90,7 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.adminAndSupervisorProtected(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json({
-                                msg: data,
-                                success: true
-                            })];
+                        return [2 /*return*/, res.json(data)];
                 }
             });
         });
@@ -116,10 +104,7 @@ var UserController = /** @class */ (function () {
                     case 0: return [4 /*yield*/, userService_1.UserService.adminProtected(req, res)];
                     case 1:
                         data = _a.sent();
-                        return [2 /*return*/, res.json({
-                                msg: data,
-                                success: true
-                            })];
+                        return [2 /*return*/, res.json(data)];
                 }
             });
         });

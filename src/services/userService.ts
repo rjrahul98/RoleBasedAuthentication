@@ -17,7 +17,8 @@ export class UserService {
         }
         catch (err) {
             return res.status(400).json({
-                message: 'user already exists',
+                message: 'something went wrong',
+                data: err,
                 success: false
             });
         }
@@ -31,6 +32,7 @@ export class UserService {
                 if (isValidUser) {
                     let token = await jwt.sign({ 'user_id': user._id, 'email': user.email, 'role': user.role }, `${process.env.SECRET_KEY}`, { expiresIn: "3 days" });
                     return res.status(200).json({
+                        'name': user.name,
                         'role': user.role,
                         'token': `Bearer ${token}`,
                         'expiresIn': 72

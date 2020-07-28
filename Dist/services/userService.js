@@ -63,7 +63,8 @@ var UserService = /** @class */ (function () {
                     case 2:
                         err_1 = _a.sent();
                         return [2 /*return*/, res.status(400).json({
-                                message: 'user already exists',
+                                message: 'something went wrong',
+                                data: err_1,
                                 success: false
                             })];
                     case 3: return [2 /*return*/];
@@ -90,6 +91,7 @@ var UserService = /** @class */ (function () {
                     case 3:
                         token = _a.sent();
                         return [2 /*return*/, res.status(200).json({
+                                'name': user.name,
                                 'role': user.role,
                                 'token': "Bearer " + token,
                                 'expiresIn': 72

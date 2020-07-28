@@ -1,16 +1,19 @@
 const express = require('express')
 const bodyParser = require('body-parser')
+const cors = require('cors')
+const passport = require('passport')
 import { Database } from './db'
 import { configRoutes } from './routes'
-const passport = require('passport')
 require('dotenv').config()
 
 export const app = express();
 const dbClient = new Database();
 dbClient.connectMongooseServer();
 
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cors());
 app.use(passport.initialize());
 
 require('./helper/passport')(passport);
